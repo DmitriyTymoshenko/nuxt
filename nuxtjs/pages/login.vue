@@ -1,10 +1,13 @@
 <template>
 <v-container>
-  <from @submit.prevent="onSubmit()">
+  <div v-if="$route.query.message" id="error">
+    Need login
+  </div>
+  <v-form @submit.prevent="onSubmit">
     <v-text-field placeholder="login" type="text"></v-text-field>
     <v-text-field placeholder="password" type="password"></v-text-field>
-    <v-btn>Submit</v-btn>
-  </from>
+    <v-btn type="submit">Submit</v-btn>
+  </v-form>
 </v-container>
 </template>
 
@@ -15,12 +18,16 @@
       methods : {
         onSubmit() {
           this.$store.dispatch('login')
-          this.$router.push({name : 'home'})
+          this.$router.push({name : 'about'})
         }
       }
     }
 </script>
 
 <style scoped>
-
+#error {
+  color: red;
+  font-size: 30px;
+  text-align: center;
+}
 </style>

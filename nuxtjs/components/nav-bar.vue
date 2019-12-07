@@ -10,7 +10,9 @@
       <v-btn text v-for="(item , i) in btn" :key="`item_${i}`"
         :to="item.name" :prefetch="item.prefetch" class="text-black-50">{{item.name}}
       </v-btn>
-      <v-btn v-for="(item , i) in login" @click.prevent="logout" :key="`item_${i}`">{{item.name}}</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn class="ml-5" to="/login" v-if="!hasToken" text>login</v-btn>
+      <v-btn class="ml-5" @click.prevent="logout" v-if="hasToken" text>log out</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -18,7 +20,6 @@
 <script>
   export default {
     name: "navbar",
-
     data() {
       return {
         btn : [
@@ -55,6 +56,11 @@
       logout(){
         this.$store.dispatch('logout')
         this.$router.push('/login')
+      }
+    },
+    computed : {
+      hasToken () {
+        return this.$store.getters.hasToken
       }
     }
   }

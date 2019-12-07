@@ -12,11 +12,15 @@ export const mutations = {
 }
 
 export const actions = {
+  // вызываеться при старте сервера
+  nuxtServerInit({dispatch }){
+    console.log('nuxtServerInit')
+  }  ,
    login ({commit}) {
     commit('SET_TOKEN' , 'truetoken')
   },
   logOut ({commit}) {
-     commit('CLEAR_TOKEN')
+     commit('CLEAR_TOKEN' )
   }
 }
 
